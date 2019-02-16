@@ -1,0 +1,18 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 0KB
+      max-request-size: 4096KB
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+translationService:
+  templateEngines:
+    - THYMLEAF
+    - FREEMARKER
+    - VELOCITY
+    - JSP
+  rateLimiter:
+    remoteIP:
+      countLimit: 1000
+      pauseTime: 15
