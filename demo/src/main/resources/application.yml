@@ -15,4 +15,4 @@ translationService:
   rateLimiter:
     remoteIP:
       countLimit: 1000
-      pauseTime: 15
+      pauseTime: 15000
