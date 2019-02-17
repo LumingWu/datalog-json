@@ -1,0 +1,3 @@
+enum Token {
+  DIRECTIVE_GLOBAL_ASSIGN_START_OPEN,
+}
