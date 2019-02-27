@@ -5,20 +5,4 @@ spring:
       max-request-size: 4096KB
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
-  cloud:
-    gcp:
-      logging:
-        enabled: true
-    gateway:
-      routes:
-      - id: comment_route
-        uri: ${app.uri}
-        predicates:
-        - Path=/comment
-        filters:
-        - name: RequestRateLimiter
-          args:
-            key-resolver: '#{@remoteIPResolver}'
-            redis-rate-limiter.replenishRate: 1
-            redis-rate-limiter.burstCapacity: 1
         

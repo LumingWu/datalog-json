@@ -1,29 +1,42 @@
-# template-parser
-A parser for translating templates from one template engine to another.
+# Datalog in JSON
+A converter that serializes a Datalog program into JSON.
 
 ---
 ## Introduction
-Template engines had been changing in Java web development. In school, I have learned the classic template engine JSP with JSTL for generating HTML. In my internship, I had to write a custom parser to translate Velocity templates to FreeMarker templates. My thought was somebody in somewhere is doing the exact same thing. Indeed, there is a translator USCavalry to do this specific translation. Like my custom parser, it handled most use cases. However, I think there is a need to create a set of tools to complete template translation.
+Datalog was an interesting database in my exploration of logic programming. Datalog uses predicate(s) to construct and represent its fact(s) and rule(s). However, that is not the case for web development. JSON is the most trending format and many frameworks / libraries were built to work with it. I will offer my idea that was used in my school project to represent Datalog program in JSON arrays and literals.
 
 ---
-## Input Validity
-Template translation will begin with the assumption that the provided template is valid. Meaning there is no hack used to create unexpected behavior(s) in order to generate an expected view. Template translator will have unexpected handle to it.
-## Semantic Assumption
-In order to handle unsupported tokens. The translator has to assume that a token DIRECTIVE_TAG_CLOSE will close the most recent unsupported token that is not HTML token.
+## Use Cases
+For front-end, if we wanted to use D3.js to visualize a Datalog program, we need to represent the program in JSON so that it can be parsed.
+
+For document database like MongoDB. However, the loss of interpretation in JSON will very likely require the users to process it to fit into the schema.
 
 ---
-## Features
-### Preprocess
-Preprocess is a unique feature for template engines that supports preprocessing. An example is macro, other template engines might not support it. Preprocess will complete these operations before template translation.
-### Normalize
-A common problem in template translation is difference in convention.
-* Syntactic Difference
-  * Variable naming convention in one template engine is not acceptable in another template engine. Another problem while I am designing is semantic
-* Semantic Difference
-  * Tags could have start tag and end tag, or just a single tag. This is a challenge for parsing because writing parser generator will need to consider semantics that do not belong to the expected semantic.
+## Structure
+Datalog Program : [Clause*]
 
-Normalize is a feature to reformat the template to a form that is easier for translation.
-### Tokenize
-Tokenize the template is a common parsing technique done before evaluation. Each template engine will have its own Flex program that will tokenize all valid tokens.
-### Evaluation
-The final process of translation is to put tokens into a parse tree and evaluate / convert to another template engine. Each template will have its own Bison program to evaluate expected tokens. Unexpected tokens will be handle in an error / todo report in the end of the translation. Error report will include: Token name, line number, and character number.
+Clause: [Predicate] | [Predicate, Literal (, Literal)\*]
+
+Literal: Predicate | EXPRESSION
+
+Predicate: [PREDICATE_SYMBOL (, ATOM)\*]
+
+EXPRESSION: Datalog expression like X = 1.
+
+PREDICATE_SYMBOL: Predicate name like PREDICATE_SYMBOL(a, b).
+
+ATOM: Variable or actual atom in Datalog, meaning strings, numbers, and identifiers.
+
+The names are not perfect description of standard Datalog because even Datalog databases called each of them differently. I hope this can provide a good overview.
+
+Key Facts:
+
+- JSON will always start with an array, the length is the number of clauses.
+- A clause is a fact if its length is 1, otherwise, it is a rule with the body following the first predicate.
+- A predicate could be an array or string. String is used for the case of ground instance being a fact. Like "bob." can be a valid Datalog clause, it is a proposition.
+- An arity 0 predicate may be represented by [PREDICATE_SYMBOL], equivalent predicate is "PREDICATE_SYMBOL()".
+- If string "g g" was in the Datalog program, it will look like ""g g"" in JSON.
+
+---
+## Demo
+A demo is created and deployed to Google App Engine. Please don't spam, my project is running on free quota.
