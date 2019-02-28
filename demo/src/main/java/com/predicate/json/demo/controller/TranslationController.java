@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.predicate.json.demo.parser.antlr4.PredicateParser;
+import com.predicate.json.demo.parser.antlr4.DatalogJSONConverter;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
@@ -20,7 +20,7 @@ public class TranslationController {
     private final Logger logger  = Logger.getLogger(TranslationController.class.getName());
 
     @Autowired
-    private PredicateParser parser;
+    private DatalogJSONConverter parser;
 
     @PostMapping("/toJson")
     @Throttling(type = ThrottlingType.RemoteAddr, limit = 1, timeUnit = TimeUnit.SECONDS)
@@ -28,7 +28,7 @@ public class TranslationController {
             @RequestParam("datalog") final String datalog
             , final HttpServletRequest request) {
         logger.log(Level.INFO, "Remote Address {0} requested for toJson", request.getRemoteAddr());
-        return new Translation(parser.parse(datalog));
+        return new Translation(parser.convert(datalog));
     }
 
 }

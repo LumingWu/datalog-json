@@ -6,13 +6,13 @@ import org.antlr.v4.runtime.RuleContext;
 
 import java.util.LinkedList;
 
-public class JSONPredicateListenerImpl extends DatalogBaseListener {
+public class DatalogJSONListenerImpl extends DatalogBaseListener {
 
     private final LinkedList<String> buffer = new LinkedList<String>();
     private String toString;
     private int capacity = 0;
 
-    public JSONPredicateListenerImpl() {
+    public DatalogJSONListenerImpl() {
     }
 
     @Override
