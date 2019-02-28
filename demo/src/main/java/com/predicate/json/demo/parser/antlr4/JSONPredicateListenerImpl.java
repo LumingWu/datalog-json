@@ -16,19 +16,19 @@ public class JSONPredicateListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void enterDatalog(DatalogParser.DatalogContext ctx) {
+    public void enterDatalog(final DatalogParser.DatalogContext ctx) {
         buffer.addLast("[");
         capacity++;
     }
 
     @Override
-    public void exitDatalog(DatalogParser.DatalogContext ctx) {
+    public void exitDatalog(final DatalogParser.DatalogContext ctx) {
         buffer.addLast("]");
         capacity++;
     }
 
     @Override
-    public void enterClause(DatalogParser.ClauseContext ctx) {
+    public void enterClause(final DatalogParser.ClauseContext ctx) {
         if (!buffer.getLast().equals("[")) {
             buffer.addLast(",");
             capacity++;
@@ -38,13 +38,13 @@ public class JSONPredicateListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void exitClause(DatalogParser.ClauseContext ctx) {
+    public void exitClause(final DatalogParser.ClauseContext ctx) {
         buffer.addLast("]");
         capacity++;
     }
 
     @Override
-    public void enterLiteral(DatalogParser.LiteralContext ctx) {
+    public void enterLiteral(final DatalogParser.LiteralContext ctx) {
         if (((RuleContext) ctx.getChild(0)).getRuleIndex() != DatalogParser.RULE_predicate) {
             buffer.addLast(",");
             capacity++;
@@ -55,7 +55,7 @@ public class JSONPredicateListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void enterPredicate(DatalogParser.PredicateContext ctx) {
+    public void enterPredicate(final DatalogParser.PredicateContext ctx) {
         if (!buffer.getLast().equals("[")) {
             buffer.addLast(",");
             capacity++;
@@ -74,7 +74,7 @@ public class JSONPredicateListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void exitPredicate(DatalogParser.PredicateContext ctx) {
+    public void exitPredicate(final DatalogParser.PredicateContext ctx) {
         if (ctx.getChildCount() > 1) {
             buffer.addLast("]");
             capacity++;
@@ -82,7 +82,7 @@ public class JSONPredicateListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void enterTerms(DatalogParser.TermsContext ctx) {
+    public void enterTerms(final DatalogParser.TermsContext ctx) {
         buffer.addLast(",");
         capacity++;
         String terms = ctx.getText();

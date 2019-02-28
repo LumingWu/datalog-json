@@ -1,8 +1,9 @@
 # Google App Engine generated folder
-appengine-generated/
-demo/.mvn/*
-demo/.settings/*
-demo/bin/*
-demo/target/*
-demo/.classpath
-demo/.project
+*/appengine-generated/
+*/.mvn/
+*/.settings/
+*/bin/
+*/target/
+*/.classpath
+*/.project
+*/.idea/
