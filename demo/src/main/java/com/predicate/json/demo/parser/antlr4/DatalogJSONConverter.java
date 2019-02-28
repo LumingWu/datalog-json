@@ -11,18 +11,18 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class PredicateParser {
+public class DatalogJSONConverter {
 
-    public PredicateParser() {
+    public DatalogJSONConverter() {
 
     }
 
-    public String parse(final String s) {
+    public String convert(final String s) {
         DatalogLexer lexer = new DatalogLexer(CharStreams.fromString(s));
         CommonTokenStream token = new CommonTokenStream(lexer);
         DatalogParser parser = new DatalogParser(token);
         ParseTree tree = parser.datalog();
-        JSONPredicateListenerImpl listener = new JSONPredicateListenerImpl();
+        DatalogJSONListenerImpl listener = new DatalogJSONListenerImpl();
         ParseTreeWalker walker = new ParseTreeWalker();
         walker.walk(listener, tree);
         return listener.toString();
