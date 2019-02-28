@@ -2,8 +2,6 @@ package com.predicate.json.demo.controller;
 
 import com.weddini.throttling.Throttling;
 import com.weddini.throttling.ThrottlingType;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,11 +11,13 @@ import com.predicate.json.demo.parser.antlr4.PredicateParser;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class TranslationController {
 
-    private static final Log LOGGER = LogFactory.getLog(TranslationController.class);
+    private final Logger logger  = Logger.getLogger(TranslationController.class.getName());
 
     @Autowired
     private PredicateParser parser;
@@ -27,7 +27,7 @@ public class TranslationController {
     Translation toJson(
             @RequestParam("datalog") final String datalog
             , final HttpServletRequest request) {
-        LOGGER.info("Remote Address " + request.getRemoteAddr() + " requested for toJson");
+        logger.log(Level.INFO, "Remote Address {0} requested for toJson", request.getRemoteAddr());
         return new Translation(parser.parse(datalog));
     }
 

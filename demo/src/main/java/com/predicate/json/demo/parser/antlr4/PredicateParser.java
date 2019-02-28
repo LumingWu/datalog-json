@@ -17,7 +17,7 @@ public class PredicateParser {
 
     }
 
-    public String parse(String s) {
+    public String parse(final String s) {
         DatalogLexer lexer = new DatalogLexer(CharStreams.fromString(s));
         CommonTokenStream token = new CommonTokenStream(lexer);
         DatalogParser parser = new DatalogParser(token);
