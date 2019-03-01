@@ -1,0 +1,11 @@
+.center {
+    margin: 0 auto;
+    width: 75%;
+}
+
+textarea {
+    width: 100%;
+    overflow-y: scroll;
+    height: 350px;
+    resize: none;
+}
