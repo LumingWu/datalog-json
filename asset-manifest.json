@@ -1,13 +1,13 @@
 {
   "main.css": "/datalog-json/static/css/main.fe33d93e.chunk.css",
-  "main.js": "/datalog-json/static/js/main.cafe516f.chunk.js",
-  "main.js.map": "/datalog-json/static/js/main.cafe516f.chunk.js.map",
+  "main.js": "/datalog-json/static/js/main.d0368cb4.chunk.js",
+  "main.js.map": "/datalog-json/static/js/main.d0368cb4.chunk.js.map",
   "runtime~main.js": "/datalog-json/static/js/runtime~main.4b33357c.js",
   "runtime~main.js.map": "/datalog-json/static/js/runtime~main.4b33357c.js.map",
   "static/js/2.122a8b5b.chunk.js": "/datalog-json/static/js/2.122a8b5b.chunk.js",
   "static/js/2.122a8b5b.chunk.js.map": "/datalog-json/static/js/2.122a8b5b.chunk.js.map",
   "index.html": "/datalog-json/index.html",
-  "precache-manifest.e4b8ba553f3ba907d0e5b7e5374a4886.js": "/datalog-json/precache-manifest.e4b8ba553f3ba907d0e5b7e5374a4886.js",
+  "precache-manifest.02f3cc596e272002e088402d6af64939.js": "/datalog-json/precache-manifest.02f3cc596e272002e088402d6af64939.js",
   "service-worker.js": "/datalog-json/service-worker.js",
   "static/css/main.fe33d93e.chunk.css.map": "/datalog-json/static/css/main.fe33d93e.chunk.css.map"
 }
