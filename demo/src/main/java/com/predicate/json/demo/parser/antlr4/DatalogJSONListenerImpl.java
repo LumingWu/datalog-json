@@ -46,10 +46,11 @@ public class DatalogJSONListenerImpl extends DatalogBaseListener {
     @Override
     public void enterLiteral(final DatalogParser.LiteralContext ctx) {
         if (((RuleContext) ctx.getChild(0)).getRuleIndex() != DatalogParser.RULE_predicate) {
-            buffer.addLast(",");
-            capacity++;
+            buffer.addLast(",\"");
+            capacity += 3;
             String expression = ctx.getText();
             buffer.addLast(expression);
+            buffer.addLast("\"");
             capacity += expression.length();
         }
     }
@@ -61,14 +62,18 @@ public class DatalogJSONListenerImpl extends DatalogBaseListener {
             capacity++;
         }
         if (ctx.getChildCount() == 1) {
+            capacity += 2;
+            buffer.addLast("\"");
             String groundInstance = ctx.getText();
             buffer.addLast(groundInstance);
+            buffer.addLast("\"");
             capacity += groundInstance.length();
         } else {
-            buffer.addLast("[");
-            capacity++;
+            buffer.addLast("[\"");
+            capacity += 3;
             String predicateSymbol = ctx.getChild(0).getText();
             buffer.addLast(predicateSymbol);
+            buffer.addLast("\"");
             capacity += predicateSymbol.length();
         }
     }
@@ -82,12 +87,15 @@ public class DatalogJSONListenerImpl extends DatalogBaseListener {
     }
 
     @Override
-    public void enterTerms(final DatalogParser.TermsContext ctx) {
-        buffer.addLast(",");
-        capacity++;
-        String terms = ctx.getText();
-        buffer.addLast(terms);
-        capacity += terms.length();
+    public void enterTerm(final DatalogParser.TermContext ctx) {
+        if (ctx.getParent().getRuleIndex() == DatalogParser.RULE_terms) {
+            buffer.addLast(",\"");
+            capacity += 3;
+            String terms = ctx.getText();
+            buffer.addLast(terms);
+            buffer.addLast("\"");
+            capacity += terms.length();
+        }
     }
 
     @Override
